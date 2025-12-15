@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.ms2.name }}
+spec:
+  replicas: {{ .Values.ms2.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.ms2.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.ms2.name }}
+    spec:
+      containers:
+      - name: {{ .Values.ms2.name }}
+        image: {{ .Values.ms2.image }}
+        ports:
+        - containerPort: {{ .Values.ms2.port }}
+        env:
+        - name: DB_HOST
+          value: {{ .Values.postgres.name }}
+        - name: DB_NAME
+          value: {{ .Values.postgres.database }}
+        - name: DB_USER
+          value: {{ .Values.postgres.user }}
+        - name: DB_PASSWORD
+          value: {{ .Values.postgres.password }}

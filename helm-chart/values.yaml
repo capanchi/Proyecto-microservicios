@@ -1,8 +1,19 @@
 ms1:
+  name: ms1-hello
   image: docker.io/cpanchi178/ms1-hello:latest
+  replicas: 1
+  port: 8080
+
 ms2:
+  name: ms2-data
   image: docker.io/cpanchi178/ms2-data:latest
+  replicas: 1
+  port: 8080
+
 postgres:
+  name: postgres
+  image: postgres:15
+  port: 5432
   user: demo
   password: demo
   database: demodb

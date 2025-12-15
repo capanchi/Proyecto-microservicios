@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.ms1.name }}
+spec:
+  selector:
+    app: {{ .Values.ms1.name }}
+  ports:
+  - port: {{ .Values.ms1.port }}
+    targetPort: {{ .Values.ms1.port }}

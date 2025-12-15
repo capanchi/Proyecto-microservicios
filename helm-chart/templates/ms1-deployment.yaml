@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.ms1.name }}
+spec:
+  replicas: {{ .Values.ms1.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.ms1.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.ms1.name }}
+    spec:
+      containers:
+      - name: {{ .Values.ms1.name }}
+        image: {{ .Values.ms1.image }}
+        ports:
+        - containerPort: {{ .Values.ms1.port }}
+        env:
+        - name: MS2_URL
+          value: "http://{{ .Values.ms2.name }}:{{ .Values.ms2.port }}/data"
