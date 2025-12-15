@@ -1,12 +1,15 @@
-name: CI-CD
+name: CI-CD Monorepo Microservicios
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  build-and-push:
+
+  build-ms1:
+    name: Build & Push MS1
     runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, 'ms1') || contains(github.event.head_commit.message, 'all')
 
     steps:
     - uses: actions/checkout@v4
@@ -17,7 +20,31 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build and Push Image
+    - name: Build & Push MS1
+      working-directory: ms1-hello
       run: |
-        docker build -t ${{ secrets.DOCKER_USER }}/ms1-hello:latest .
-        docker push ${{ secrets.DOCKER_USER }}/ms1-hello:latest
+        ls -la
+        docker build -t cpanchi178/ms1-hello:latest .
+        docker push cpanchi178/ms1-hello:latest
+
+
+  build-ms2:
+    name: Build & Push MS2
+    runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, 'ms2') || contains(github.event.head_commit.message, 'all')
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Login DockerHub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build & Push MS2
+      working-directory: ms2-data
+      run: |
+        ls -la
+        docker build -t cpanchi178/ms2-data:latest .
+        docker push cpanchi178/ms2-data:latest
