@@ -19,6 +19,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build & Push Image
+      working-directory: ms1-hello
       run: |
          docker build -t ${{ secrets.DOCKER_USER }}/ms1-hello:latest .
          docker push ${{ secrets.DOCKER_USER }}/ms1-hello:latest

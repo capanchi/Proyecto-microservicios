@@ -19,6 +19,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build & Push Image
+      working-directory: ms2-data
       run: |
         docker build -t ${{ secrets.DOCKER_USER }}/ms2-data:latest .
         docker push ${{ secrets.DOCKER_USER }}/ms2-data:latest
