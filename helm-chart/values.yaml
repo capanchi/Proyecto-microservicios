@@ -1,7 +1,7 @@
 ms1:
-  image: docker.io/tuusuario/ms1-hello:latest
+  image: docker.io/cpanchi178/ms1-hello:latest
 ms2:
-  image: docker.io/tuusuario/ms2-data:latest
+  image: docker.io/cpanchi178/ms2-data:latest
 postgres:
   user: demo
   password: demo
